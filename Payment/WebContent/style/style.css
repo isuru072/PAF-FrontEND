@@ -32,6 +32,7 @@ th {
 	height: 50px;
 	background: #0072ff;
 	color: #fff;
+	text-transform: uppercase;
 }
 
 th, td {

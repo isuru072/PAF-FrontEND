@@ -1,167 +1,91 @@
-$(document).ready(function() 
-{  
-	if ($("#alertSuccess").text().trim() == "")  
-	{   
-		$("#alertSuccess").hide();  
-	}  
-	$("#alertError").hide(); }); 
- 
-// SAVE ============================================ 
-$(document).on("click", "#btnSave", function(event) 
-{  
-	// Clear alerts---------------------  
-	$("#alertSuccess").text("");  
+$(document).ready(function () {
 	$("#alertSuccess").hide();  
-	$("#alertError").text("");  
-	$("#alertError").hide(); 
- 
-	// Form validation-------------------  
-	var status = validateItemForm();  
-	if (status != true)  
-	{   
-		$("#alertError").text(status);   
-		$("#alertError").show();   
-		return;  
-	} 
- 
-	// If valid------------------------  
-	var type = ($("#hidItemIDSave").val() == "") ? "POST" : "PUT"; 
+	$("#alertError").hide();
 	
-	$.ajax( 
-	{  
-		url : "ItemsAPI",  
-		type : type,  
-		data : $("#formItem").serialize(),  
-		dataType : "text",  
-		complete : function(response, status)  
-		{   
-			onItemSaveComplete(response.responseText, status);  
-		} 
-	}); 
-}); 
+            $("#save").click(
+              function (e) {
+            		
+            		$("#alertSuccess").text("");  
+            		$("#alertSuccess").hide();  
+            		$("#alertError").text("");  
+            		$("#alertError").hide(); 
+            		
+            		var status = validateItemForm();  
+            		if (status != true)  
+            		{   
+            			$("#alertError").text(status);   
+            			$("#alertError").show();   
+            			return;  
+            		}    	  
+            	    
+                e.preventDefault();
+                
+                var patientID = $('#patientID').val();
+                var hospitalID = $('#hospitalID').val();
+                var docID = $('#docID').val();
+                var amount = $('#amount').val();
+                var appointmentID = $('#appointmentID').val();
+                var paymentStatus = $('#paymentStatus').val();          
 
-function onItemSaveComplete(response, status) 
-{  
-	if (status == "success")  
-	{   
-		var resultSet = JSON.parse(response); 
+                $.ajax({
+                  type: "POST",
+                  url: "http://localhost:8090/Payment/paymentAPI/Payments",
+                  data: "patientID=" + patientID + "&hospitalID=" + hospitalID + "&docID=" + docID + "&amount=" + amount + "&appointmentID=" + appointmentID + "&paymentStatus=" + paymentStatus,
+                  success: function (msg) {                	
+                	  
+                		$("#alertSuccess").text("Successfully saved.");    
+            			$("#alertSuccess").show(); 
+            			$("#alertError").hide();   
+       
+                	 $("#hidItemIDSave").val("");    
+                    $("#paymetnForm")[0].reset(); 
+                  },
+                  
+                  error: function (en) {
+                	  $("#alertError").text("Error while detecting.");   
+              		$("#alertError").show();  
+              		$("#alertSuccess").hide(); 
+                  }
+                });
+              });
+          });
 
-		if (resultSet.status.trim() == "success")   
-		{    
-			$("#alertSuccess").text("Successfully saved.");    
-			$("#alertSuccess").show(); 
 
-			$("#divItemsGrid").html(resultSet.data);   
-		} else if (resultSet.status.trim() == "error")   
-		{    
-			$("#alertError").text(resultSet.data);    
-			$("#alertError").show();   
-		} 
-
-	} else if (status == "error")  
-	{   
-		$("#alertError").text("Error while saving.");   
-		$("#alertError").show();  
-	} else  
-	{   
-		$("#alertError").text("Unknown error while saving..");   
-		$("#alertError").show();  
-	} 
-
-	$("#hidItemIDSave").val("");  
-	$("#formItem")[0].reset(); 
-} 
- 
-// UPDATE========================================== 
-$(document).on("click", ".btnUpdate", function(event) 
-{     
-	$("#hidItemIDSave").val($(this).closest("tr").find('#hidItemIDUpdate').val());     
-	$("#itemCode").val($(this).closest("tr").find('td:eq(0)').text());     
-	$("#itemName").val($(this).closest("tr").find('td:eq(1)').text());     
-	$("#itemPrice").val($(this).closest("tr").find('td:eq(2)').text());     
-	$("#itemDesc").val($(this).closest("tr").find('td:eq(3)').text()); 
-}); 
-
-//REMOVE===========================================
-$(document).on("click", ".btnRemove", function(event) 
-{  
-	$.ajax(  
-	{   
-		url : "ItemsAPI",   
-		type : "DELETE",   
-		data : "itemID=" + $(this).data("itemid"),   
-		dataType : "text",   
-		complete : function(response, status)   
-		{    
-			onItemDeleteComplete(response.responseText, status);   
-		}  
-	}); 
-}); 
-
-function onItemDeleteComplete(response, status) 
-{  
-	if (status == "success")  
-	{   
-		var resultSet = JSON.parse(response); 
-
-		if (resultSet.status.trim() == "success")   
-		{    
-			$("#alertSuccess").text("Successfully deleted.");    
-			$("#alertSuccess").show(); 
-		
-			$("#divItemsGrid").html(resultSet.data);   
-		} else if (resultSet.status.trim() == "error")   
-		{    
-			$("#alertError").text(resultSet.data);    
-			$("#alertError").show();   
-		}
-
-	} else if (status == "error")  
-	{   
-		$("#alertError").text("Error while deleting.");   
-		$("#alertError").show();  
-	} else  
-	{   
-		$("#alertError").text("Unknown error while deleting..");   
-		$("#alertError").show();  
-	}
-}
- 
-// CLIENT-MODEL========================================================================= 
+//CLIENT-MODEL========================================================================= 
 function validateItemForm() 
 {  
-	// CODE  
-	if ($("#itemCode").val().trim() == "")  
+	
+	if ($("#patientID").val().trim() == "")  
 	{   
-		return "Insert Item Code.";  
-	} 
- 
-	// NAME  
-	if ($("#itemName").val().trim() == "")  
-	{   
-		return "Insert Item Name.";  
-	} 
-	//PRICE-------------------------------  
-	if ($("#itemPrice").val().trim() == "")  
-	{   
-		return "Insert Item Price.";  
+		return "Insert Patient ID.";  
 	} 
 
-	// is numerical value  
-	var tmpPrice = $("#itemPrice").val().trim();  
-	if (!$.isNumeric(tmpPrice))  
+
+	if ($("#hospitalID").val().trim() == "")  
 	{   
-		return "Insert a numerical value for Item Price.";  
+		return "Insert hospital ID.";  
 	} 
-
-	// convert to decimal price  
-	$("#itemPrice").val(parseFloat(tmpPrice).toFixed(2)); 
-
-	// DESCRIPTION------------------------  
-	if ($("#itemDesc").val().trim() == "")  
+	
+	if ($("#docID").val().trim() == "")  
 	{   
-		return "Insert Item Description.";  
+		return "Insert doc ID.";  
 	} 
-
+	
+	if ($("#amount").val().trim() == "")  
+	{   
+		return "Insert amount.";  
+	} 
+	
+	if ($("#appointmentID").val().trim() == "")  
+	{   
+		return "Insert appointment ID.";  
+	} 
+	
+	if ($("#paymentStatus").val().trim() == "")  
+	{   
+		return "Insert payment Status.";  
+	} 
 	return true; 
+
 }
+

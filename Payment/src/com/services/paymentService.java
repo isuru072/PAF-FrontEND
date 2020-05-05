@@ -85,7 +85,7 @@ public class paymentService {
 			if (con == null) {
 				return "Error while connecting to the database for reading.";
 			}
-			output = "<table border=\"1\"><tr><th>PaymentID</th><th>hospitalID</th><th>patientID</th><th>docID</th><th>amount</th><th>dates</th><th>appointmentID</th><th>paymentStatus</th></tr>";
+			output = "<table border=\"1\"><tr><th>Payment ID</th><th>hospital ID</th><th>patient ID</th><th>doc ID</th><th>amount</th><th>dates</th><th>appointment ID</th><th>payment Status</th></tr>";
 			String query = "select * from payments";
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
@@ -131,7 +131,7 @@ public class paymentService {
 				
 				return "Error while connecting to the database for reading.";
 			}
-			output = "<table border=\"1\"><tr><th>PaymentID</th><th>hospitalID</th><th>patientID</th><th>docID</th><th>amount</th><th>dates</th><th>appointmentID</th><th>paymentStatus</th></tr>";
+			output = "<table border=\"1\"><tr><th>Payment ID</th><th>hospital ID</th><th>patient ID</th><th>doc ID</th><th>amount</th><th>dates</th><th>appointment ID</th><th>payment Status</th></tr>";
 			String query = "select * from payments where patientID = " + patientID;
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
