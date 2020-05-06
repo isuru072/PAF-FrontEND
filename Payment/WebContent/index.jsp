@@ -1,4 +1,5 @@
-<%@page import="com.controllers.paymentController"%>
+<%@page import="model.payment"%>
+<%@page import="com.PaymentApi"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -10,7 +11,7 @@
 	rel="stylesheet" id="bootstrap-css">
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="Components/jquery-3.4.1.min.js"></script>
+<script src="components/jquery-3.2.1.min.js"></script>
 <script src="Components/paymentJS.js"></script>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -26,33 +27,24 @@
 					Section</p>
 			</div>
 
-			<form class="form-content" id="paymetnForm">
+			<form class="form-content" id="paymentForm" name="paymentForm" method="post" action="index.jsp">
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							Patient ID: <br/><input type="text" class="form-control" id="patientID"/>
+							Card No: <br/><input type="text" class="form-control" id="cardNo"/>
 						</div>
 						<div class="form-group">
-							Hospital ID: <br/><input type="text" class="form-control" id="hospitalID" />
+							Cvv: <br/><input type="text" class="form-control" id="cvv" />
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							doc ID: <br/><input type="text" class="form-control" id="docID" />
+							Card Holder Name: <br/><input type="text" class="form-control" id="ccHolderName" />
 						</div>
 						<div class="form-group">
-							amount; <br/><input type="text" class="form-control" id="amount" />
+							ExpDate: <br/><input type="text" class="form-control" id="ccExpDate" />
 						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							appointmentID : <br/><input type="text" class="form-control" id="appointmentID" />
-						</div>
-						<div class="form-group">
-							paymentStatus: <br/><input type="text" class="form-control" id="paymentStatus" />
-						</div>
-					</div>
-				
+					</div>				
 				</div>
 					<div id="alertSuccess" class="alert alert-success">
 						<%
@@ -61,17 +53,18 @@
 					</div>
 					<div id="alertError" class="alert alert-danger"></div>
 					
-				<button id="save" type="button" class="btnSubmit">Submit</button>
-				<input type="hidden" id="hidItemIDSave" name="hidItemIDSave" value=""> 
+				<button id="btnSave" type="button" class="btnSubmit">Submit</button>
+				<input type="hidden" id="hidAppIDSave" name="hidItemIDSave" value=""> 
 			</form>
 		</div>
 	
 
 		<div id ="divItemsGrid" class="container register-form">
 		<%
-			paymentController payObj = new paymentController();
-			out.print(payObj.readPayments());
+			payment payObj = new payment();
+			out.print(payObj.readPayment());
 		%>
+	</div>
 	</div>
 
 
