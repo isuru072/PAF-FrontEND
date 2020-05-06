@@ -39,3 +39,9 @@ th, td {
 	padding: 15px;
 	text-align: left;
 }
+.body-style{
+	background-image: url("img/bg.jpg");
+	 background-position: center;
+	  background-repeat: no-repeat;
+	  background-size: cover;
+}

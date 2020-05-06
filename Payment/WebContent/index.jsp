@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="style/style.css">
 <title>HC-System_Payment</title>
 </head>
-<body>
+<body class="body-style">
 	<div class="container register-form" style="background-color:white">
 		<div class="form">
 			<div class="note">
