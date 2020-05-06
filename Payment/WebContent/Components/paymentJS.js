@@ -28,11 +28,17 @@ $(document).on("click", "#btnSave", function(event)
 	// If valid------------------------  
 	var t = ($("#hidAppIDSave").val() == "") ? "POST" : "PUT";
 	
+	var cardNo = $('#cardNo').val();
+	var cvv = $('#cvv').val();
+	var ccHolderName = $('#ccHolderName').val();
+	var ccExpDate = $('#ccExpDate').val();
+	var hidAppIDSave = $('#hidAppIDSave').val();
+	
 	$.ajax(
 	{
 		url : "PaymentAPI",
 		type : t,
-		data : $("#paymentForm").serialize(),
+		data : "cardNo=" + cardNo + "&cvv=" + cvv  + "&ccHolderName=" + ccHolderName + "&ccExpDate=" + ccExpDate  + "&hidAppIDSave=" + hidAppIDSave,
 		dataType : "text",
 		complete : function(response, status)
 		{
@@ -68,7 +74,6 @@ function onCardSaveComplete(response, status){
 	$("#paymentForm")[0].reset();
 }
   
-
 
 //UPDATE========================================== 
 $(document).on("click", ".btnUpdate", function(event) 
