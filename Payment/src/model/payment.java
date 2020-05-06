@@ -50,12 +50,12 @@ public String readPayment() {
 
 		
 		  while (rs.next())   {  
-
+			  	String id = Integer.toString(rs.getInt("id"));
 			  	String cardNo = Integer.toString(rs.getInt("cardNo"));
 				String cvv = Integer.toString(rs.getInt("cvv"));
 				String ccHolderName = rs.getString("ccHolderName");
 				String ccExpDate = rs.getString("ccExpDate");
-				String id = Integer.toString(rs.getInt("id"));
+				
 				
 			
 	
@@ -126,7 +126,7 @@ public String insertCCDetails(String cardNo, String cvv, String ccHolderName, St
 }
 
 //Update appointment
-public String updatecreditcardetails(String cardNo, String cvv, String ccHolderName, String ccExpDate, String id)  {   
+public String updatecreditcardetails( String id, String cardNo, String cvv, String ccHolderName, String ccExpDate)  {   
 	String output = ""; 
  
   try   {   
@@ -142,10 +142,10 @@ public String updatecreditcardetails(String cardNo, String cvv, String ccHolderN
    PreparedStatement preparedStmt = con.prepareStatement(query); 
  
    // binding values    
-   	preparedStmt.setString(1, cardNo);
-	preparedStmt.setString(2, cvv);
-	preparedStmt.setString(3,ccHolderName);
-	preparedStmt.setString(4,ccExpDate);
+   	preparedStmt.setInt(1, Integer.parseInt(cardNo));
+	preparedStmt.setInt(2, Integer.parseInt(cvv));
+	preparedStmt.setString(3, ccHolderName);
+	preparedStmt.setString(4, ccExpDate);
 	preparedStmt.setInt(5, Integer.parseInt(id));
    
  

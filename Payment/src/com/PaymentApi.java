@@ -81,12 +81,12 @@ public class PaymentApi extends HttpServlet {
 
 		Map<String, String> param = getParasMap(request);
 		
-		String result = appObj.updatecreditcardetails(				
+		String result = appObj.updatecreditcardetails(
+				param.get("hidAppIDSave").toString(),
 				param.get("cardNo").toString(),     
 				param.get("cvv").toString(),      
-		 		param.get("ccHolderName").toString().toString(), 
-		 		param.get("ccExpDate").toString().toString(), 
-		 		param.get("hidAppIDSave")).toString();		 		
+		 		param.get("ccHolderName").toString().toString().replace("+", " "), 
+		 		param.get("ccExpDate").toString().toString().replace("+", " "));		 		
 		
 		response.getWriter().write(result);
 	}

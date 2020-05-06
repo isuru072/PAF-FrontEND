@@ -68,62 +68,6 @@ function onCardSaveComplete(response, status){
 	$("#paymentForm")[0].reset();
 }
   
-//$(document).ready(function () {
-//    $("#alertSuccess").hide();  
-//    $("#alertError").hide();
-//    
-//            $("#btnSave").click(
-//              function (e) {
-//                    
-//                    $("#alertSuccess").text("");  
-//                    $("#alertSuccess").hide();  
-//                    $("#alertError").text("");  
-//                    $("#alertError").hide(); 
-//                    
-//                    var status = validateCardForm();  
-//                    if (status != true)  
-//                    {   
-//                        $("#alertError").text(status);   
-//                        $("#alertError").show();   
-//                        return;  
-//                    }          
-//                    
-//                e.preventDefault();
-//                
-//                var cardNo = $('#cardNo').val();
-//                var cvv = $('#cvv').val();
-//                var ccHolderName = $('#ccHolderName').val();
-//                var ccExpDate = $('#ccExpDate').val();
-//                  
-//
-//
-//                $.ajax({
-//                  type: "POST",
-//                  url: "PaymentAPI",
-//                  data:"cardNo=" + cardNo + "&cvv=" + cvv  + "&ccHolderName=" + ccHolderName + "&ccExpDate=" + ccExpDate,  
-//                  success: function (msg) {                    
-//                      
-//                        $("#alertSuccess").text("Successfully saved.");    
-//                        $("#alertSuccess").show(); 
-//                        $("#alertError").hide();   
-//       
-//                     $("#hidItemIDSave").val("");    
-//                    $("#paymentForm")[0].reset(); 
-//                  },
-//                  
-//                  error: function (en) {
-//                      $("#alertError").text("Error while detecting.");   
-//                      $("#alertError").show();  
-//                      $("#alertSuccess").hide(); 
-//                  }
-//                });
-//              });            
-//});
-
-
-
-
-
 
 
 //UPDATE========================================== 
