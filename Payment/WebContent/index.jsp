@@ -17,7 +17,7 @@
 <title>HC-System_Payment</title>
 </head>
 <body class="body-style">
-	<div class="container register-form" style="background-color:white">
+	<div class="container register-form" style="background-color:white;margin-top: 20px;padding-top: 15px;margin-bottom: 20px;">
 		<div class="form">
 			<div class="note">
 				<p style="text-transform: uppercase;">Online hospital Payment
