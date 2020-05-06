@@ -75,7 +75,7 @@ function onCardSaveComplete(response, status){
 }
   
 
-//UPDATE========================================== 
+
 $(document).on("click", ".btnUpdate", function(event) 
 		{     
 	$("#hidAppIDSave").val($(this).closest("tr").find('#hidAppIDUpdate').val());     
@@ -88,7 +88,7 @@ $(document).on("click", ".btnUpdate", function(event)
 });
 
 
-//Remove Operation
+//Delete
 $(document).on("click", ".btnRemove", function(event){
 	$.ajax(
 	{

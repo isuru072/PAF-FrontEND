@@ -50,22 +50,18 @@ public String readPayment() {
 
 		
 		  while (rs.next())   {  
+			  
 			  	String id = Integer.toString(rs.getInt("id"));
 			  	String cardNo = Integer.toString(rs.getInt("cardNo"));
 				String cvv = Integer.toString(rs.getInt("cvv"));
 				String ccHolderName = rs.getString("ccHolderName");
 				String ccExpDate = rs.getString("ccExpDate");
 				
-				
-			
-	
-
 			  output += "<tr><td><input id='hidAppIDUpdate' name='hidAppIDUpdate' type='hidden' value='" + id + "'>" + cardNo + "</td>"; 
 			  output += "<td>" + cvv + "</td>";
 			  output += "<td>" + ccHolderName + "</td>";
 			  output += "<td>" + ccExpDate + "</td>";
-
-			   
+			  
 			  output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td>"
 			  		+ "<td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger' data-id='"+ id +"'>"+"</td></tr>";
 
@@ -84,7 +80,7 @@ public String readPayment() {
 		return output;
 	}
 
-//Insert appointment
+//Insert CardDetails
 public String insertCCDetails(String cardNo, String cvv, String ccHolderName, String ccExpDate) {
 	String output = "";
 

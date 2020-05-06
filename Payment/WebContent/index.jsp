@@ -17,7 +17,7 @@
 <title>HC-System_Payment</title>
 </head>
 <body>
-	<div class="container register-form">
+	<div class="container register-form" style="background-color:white">
 		<div class="form">
 			<div class="note">
 				<p style="text-transform: uppercase;">Online hospital Payment
@@ -31,7 +31,7 @@
 							Card No: <br/><input type="text" class="form-control" name="cardNo" id="cardNo"/>
 						</div>
 						<div class="form-group">
-							Cvv: <br/><input type="text" class="form-control" name="cvv" id="cvv" />
+							CVV: <br/><input type="text" class="form-control" name="cvv" id="cvv" required />
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -39,7 +39,7 @@
 							Card Holder Name: <br/><input type="text" class="form-control" name="ccHolderName" id="ccHolderName" />
 						</div>
 						<div class="form-group">
-							ExpDate: <br/><input type="text" class="form-control" name="ccExpDate" id="ccExpDate" />
+							ExpDate: <br/><input type="text" class="form-control" name="ccExpDate" id="ccExpDate" required />
 						</div>
 					</div>				
 				</div>
@@ -53,7 +53,7 @@
 		</div>
 	
 
-		<div id ="divItemsGrid" class="container register-form">
+		<div id ="divItemsGrid" class="container register-form" style="padding-bottom: 20px;">
 		<%
 			payment payObj = new payment();
 			out.print(payObj.readPayment());
