@@ -36,7 +36,8 @@ public String readPayment() {
 		} 
 
 
-		output = "<table border='1'><tr><th>Card No</th>"
+		output = "<table border='1'><tr>"
+				+ "<th>Card No</th>"
 				+ "<th>Cvv</th>"
 				+ "<th>Card Holder Name</th>"
 				+ "<th>ExpDate</th>"
@@ -54,7 +55,7 @@ public String readPayment() {
 				String cvv = Integer.toString(rs.getInt("cvv"));
 				String ccHolderName = rs.getString("ccHolderName");
 				String ccExpDate = rs.getString("ccExpDate");
-				int id = rs.getInt("id");
+				String id = Integer.toString(rs.getInt("id"));
 				
 			
 	
@@ -72,7 +73,7 @@ public String readPayment() {
 		  
 		  con.close(); 
 
-		  // Complete the html table   
+		
 		  output += "</table>"; 
 		}
 		catch (Exception e) {  
@@ -84,7 +85,7 @@ public String readPayment() {
 	}
 
 //Insert appointment
-public String insertCCDetails(int cardNo, int cvv, String ccHolderName, String ccExpDate) {
+public String insertCCDetails(String cardNo, String cvv, String ccHolderName, String ccExpDate) {
 	String output = "";
 
 	try {
@@ -101,8 +102,8 @@ public String insertCCDetails(int cardNo, int cvv, String ccHolderName, String c
 
 		// binding values 
 		preparedStmt.setInt(1, 0);
-		preparedStmt.setInt(2, cardNo);
-		preparedStmt.setInt(3, cvv);
+		preparedStmt.setString(2, cardNo);
+		preparedStmt.setString(3, cvv);
 		preparedStmt.setString(4, ccHolderName);
 		preparedStmt.setString(5, ccExpDate);
 		
@@ -125,7 +126,7 @@ public String insertCCDetails(int cardNo, int cvv, String ccHolderName, String c
 }
 
 //Update appointment
-public String updatecreditcardetails(int cardNo, int cvv, String ccHolderName, String ccExpDate, int id)  {   
+public String updatecreditcardetails(String cardNo, String cvv, String ccHolderName, String ccExpDate, String id)  {   
 	String output = ""; 
  
   try   {   
@@ -141,11 +142,11 @@ public String updatecreditcardetails(int cardNo, int cvv, String ccHolderName, S
    PreparedStatement preparedStmt = con.prepareStatement(query); 
  
    // binding values    
-   	preparedStmt.setInt(1, cardNo);
-	preparedStmt.setInt(2, cvv);
+   	preparedStmt.setString(1, cardNo);
+	preparedStmt.setString(2, cvv);
 	preparedStmt.setString(3,ccHolderName);
 	preparedStmt.setString(4,ccExpDate);
-	preparedStmt.setInt(5, id);
+	preparedStmt.setInt(5, Integer.parseInt(id));
    
  
    // execute the statement    
@@ -163,7 +164,7 @@ public String updatecreditcardetails(int cardNo, int cvv, String ccHolderName, S
   return output;  
   }
 
-public String deleteCC(int id) {  
+public String deleteCC(String id) {  
 	String output = ""; 
  
  try  {   
@@ -173,22 +174,21 @@ public String deleteCC(int id) {
 	  return "Error while connecting to the database for deleting.";   
   } 
  
-  // create a prepared statement   
+
   String query = "DELETE FROM creditcardetails WHERE id=?"; 
  
   PreparedStatement preparedStmt = con.prepareStatement(query); 
  
-  // binding values   
-  preparedStmt.setInt(1, id);       
-  // execute the statement   
+
+  preparedStmt.setInt(1, Integer.parseInt(id));       
   preparedStmt.execute();   
   con.close(); 
  
-  //create JSON Object
+  
   String newPayment = readPayment();
   output = "{\"status\":\"success\", \"data\": \"" + newPayment + "\"}";
   }  catch (Exception e)  {  
-	  //Create JSON object 
+	 
 	  output = "{\"status\":\"error\", \"data\": \"Error while Deleting Card.\"}";
 	  System.err.println(e.getMessage());  
 	  

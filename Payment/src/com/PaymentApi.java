@@ -42,8 +42,8 @@ public class PaymentApi extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String result = appObj.insertCCDetails(
-				Integer.valueOf(request.getParameter("cardNo")),
-				Integer.valueOf(request.getParameter("cvv")), 
+				request.getParameter("cardNo"),
+				request.getParameter("cvv"), 
 				request.getParameter("ccHolderName"), 
 				request.getParameter("ccExpDate")			
 				);
@@ -82,12 +82,11 @@ public class PaymentApi extends HttpServlet {
 		Map<String, String> param = getParasMap(request);
 		
 		String result = appObj.updatecreditcardetails(				
-				Integer.valueOf(param.get("cardNo")),     
-				Integer.valueOf(param.get("cvv")),      
-		 		param.get("ccHolderName").toString().replace("+", " "), 
-		 		param.get("ccExpDate").toString().replace("+", " "), 
-		 		Integer.valueOf(param.get("hidAppIDSave")));
-		 		
+				param.get("cardNo").toString(),     
+				param.get("cvv").toString(),      
+		 		param.get("ccHolderName").toString().toString(), 
+		 		param.get("ccExpDate").toString().toString(), 
+		 		param.get("hidAppIDSave")).toString();		 		
 		
 		response.getWriter().write(result);
 	}
@@ -101,7 +100,7 @@ public class PaymentApi extends HttpServlet {
 		Map<String, String> param = getParasMap(request);
 		
 		String result = appObj.deleteCC(
-				Integer.valueOf(param.get("id")));
+				param.get("id").toString());
 		
 		response.getWriter().write(result);
 	}

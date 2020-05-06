@@ -1,5 +1,4 @@
 <%@page import="model.payment"%>
-<%@page import="com.PaymentApi"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -9,12 +8,9 @@
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="components/jquery-3.2.1.min.js"></script>
+<script src="Components/jquery-3.4.1.min.js"></script>
 <script src="Components/paymentJS.js"></script>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script	src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <link rel="stylesheet" href="style/style.css">
 <title>HC-System_Payment</title>
@@ -31,30 +27,27 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							Card No: <br/><input type="text" class="form-control" id="cardNo"/>
+							Card No: <br/><input type="text" class="form-control" name="cardNo" id="cardNo"/>
 						</div>
 						<div class="form-group">
-							Cvv: <br/><input type="text" class="form-control" id="cvv" />
+							Cvv: <br/><input type="text" class="form-control" name="cvv" id="cvv" />
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							Card Holder Name: <br/><input type="text" class="form-control" id="ccHolderName" />
+							Card Holder Name: <br/><input type="text" class="form-control" name="ccHolderName" id="ccHolderName" />
 						</div>
 						<div class="form-group">
-							ExpDate: <br/><input type="text" class="form-control" id="ccExpDate" />
+							ExpDate: <br/><input type="text" class="form-control" name="ccExpDate" id="ccExpDate" />
 						</div>
 					</div>				
 				</div>
-					<div id="alertSuccess" class="alert alert-success">
-						<%
-							out.print(session.getAttribute("statusMsg"));
-						%>
-					</div>
-					<div id="alertError" class="alert alert-danger"></div>
-					
-				<button id="btnSave" type="button" class="btnSubmit">Submit</button>
-				<input type="hidden" id="hidAppIDSave" name="hidItemIDSave" value=""> 
+				
+					<div id="alertSuccess" class="alert alert-success"></div>  
+					<div id="alertError" class="alert alert-danger"></div> 
+
+					 <input id="btnSave" name="btnSave" type="button" value="Save" class="btn btn-primary">  
+					 <input type="hidden" id="hidAppIDSave" name="hidAppIDSave" value=""> 
 			</form>
 		</div>
 	
